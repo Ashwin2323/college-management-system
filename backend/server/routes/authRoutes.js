@@ -37,5 +37,11 @@ router.post('/login', loginUser);
 router.get('/profile', protect, userController.getProfile);
 router.delete('/profile', protect, authorize('admin'), userController.deleteUser);
 
+// Logout
+router.post('/logout', protect, (req, res) => {
+    // Clear cookies or token stored on the client
+    res.clearCookie('token'); // clear the cookie if you're storing JWT in cookies
+    res.status(200).json({ message: 'Logged out successfully' });
+  });
 
 module.exports = router;

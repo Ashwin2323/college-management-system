@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const authRoutes = require('./server/routes/authRoutes');
 const studentRoutes = require('./server/routes/studentRoutes');
 const teacherRoutes = require('./server/routes/teacherRoutes');
@@ -10,7 +11,7 @@ const { protect } = require('./server/middleware/authMiddleware');
 
 
 const app = express();
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 

@@ -65,6 +65,12 @@ const loginUser = async (req, res) => {
     const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     // Send response with token
+    res.cookie('token', token,{
+      httpOnly: true,  // Ensure cookie is not accessible via JavaScript
+      // No need to set 'secure' for development since you're using HTTP
+      maxAge: 24 * 60 * 60 * 1000,  // Token expires in 1 day
+    }); // Set secure cookie if in production
+
     res.status(200).json({
       message: 'Login successful',
       token: token,

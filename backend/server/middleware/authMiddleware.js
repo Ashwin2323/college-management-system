@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 // Middleware to protect routes
 const protect = (req, res, next) => {
-  const token = req.header('Authorization')?.split(' ')[1]; // Extract token from Bearer header
+  const token = req.cookies.token || req.header('Authorization')?.split(' ')[1]; // Extract token from Bearer header
   if (!token) {
     return res.status(401).json({ message: 'No token, authorization denied' });
   }
@@ -26,7 +26,3 @@ const authorize = (...roles) => (req, res, next) => {
 
 module.exports = { protect, authorize };
 
-// Example Usage in Routes:
-// const { protect, authorize } = require('../middleware/authMiddleware');
-// router.get('/profile', protect, userController.getProfile); // Protect route
-// router.delete('/delete-user/:id', protect, authorize('admin'), adminController.deleteUser); // Admin-only route

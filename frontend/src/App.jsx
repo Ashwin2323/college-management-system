@@ -1,20 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home'; 
+import Login from './Pages/Login'; 
 import Register from './pages/Register';
-// Import other pages as needed
+import StudentDashboard from './pages/StudentDashboard';
+import TeacherDashboard from './pages/TeacherDashboard';
+import AppRoutes from './routes/AppRoutes'; // If you're using AppRoutes for protected routes
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        {/* Add more routes as needed */}
-      </Switch>
+  return (<>
+  <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/student-dashboard" element={<StudentDashboard />} />
+        <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
+        {/* Use AppRoutes for protected routes if needed */}
+      </Routes>
     </Router>
+  </>
+    
   );
 }
 
